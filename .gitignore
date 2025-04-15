@@ -3,6 +3,7 @@ node_modules/
 dist/
 export/
 storage/
+tests/
 
 # ─── Env і ключі ───────────
 .env
@@ -28,3 +29,4 @@ coverage/
 
 # ─── Резервні файли ────────
 *.tsbuildinfo
+
