@@ -24,3 +24,4 @@ export async function verifyCommand() {
   console.log("🧾 Thought:", last.content);
   console.log("🔐 Signature valid:", isValid);
 }
+
