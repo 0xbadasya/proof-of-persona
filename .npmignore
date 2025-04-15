@@ -1,0 +1,31 @@
+# ─── Playground — локальний dev only ───────────────
+playground/
+
+# ─── Тести ──────────────────────────────────────────
+tests/
+*.test.ts
+*.spec.ts
+
+# ─── Build configs ──────────────────────────────────
+tsconfig.json
+tsup.config.ts
+
+# ─── Dev env ────────────────────────────────────────
+.vscode/
+.idea/
+.env
+.env.*
+
+# ─── Docs / Drafts / Внутрішнє ──────────────────────
+README_DRAFT.md
+API.md
+.gitignore
+.npmignore
+
+# ─── Виводи, які не потрібні в пакеті ───────────────
+export/
+storage/
+*.log
+*.zip
+*.bak
+*.tmp

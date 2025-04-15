@@ -1,0 +1,52 @@
+{
+  "name": "proof-of-persona",
+  "version": "1.0.0",
+  "description": "Криптографічно верифіковані цифрові особистості з ончейн-репутацією та LLM-стилем мислення.",
+  "main": "dist/index.js",
+  "type": "commonjs",
+  "author": "badasya",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node playground/create-persona.ts",
+    "build": "tsup",
+    "test": "jest"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ]
+  },
+  "bin": {
+    "persona": "./bin/persona.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "archiver": "^7.0.1",
+    "dotenv": "^16.5.0",
+    "ethers": "^5.8.0",
+    "fast-levenshtein": "^3.0.0",
+    "openai": "^4.94.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.14.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.2",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
+  }
+}

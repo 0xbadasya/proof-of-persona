@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",
+      "module": "CommonJS",
+      "lib": ["ES2020"],
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "strict": true,
+      "outDir": "dist",
+    //   "rootDir": "src",
+      "forceConsistentCasingInFileNames": true,
+      "skipLibCheck": true,
+      "noImplicitAny": false
+    },
+    "include": ["src", "playground", "tests"],
+    "exclude": ["node_modules", "dist"]
+}
+  
