@@ -20,7 +20,7 @@ tsup.config.ts
 README.dev.md
 README.docs.md
 .idea/
-storage/
+./storage/
 export/
 *.log
 tests/
