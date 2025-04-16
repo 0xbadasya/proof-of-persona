@@ -6,6 +6,13 @@
   "type": "commonjs",
   "author": "badasya",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xbadasya/proof-of-persona"
+  },
+  "bugs": {
+    "url": "https://github.com/0xbadasya/proof-of-persona/issues"
+  },
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "ts-node playground/create-persona.ts",

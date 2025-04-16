@@ -6,9 +6,6 @@ interface ThoughtPayload {
   timestamp: string;
 }
 
-/**
- * Підписує думку приватним ключем
- */
 export async function signThought(thought: ThoughtPayload, privateKey: string): Promise<string> {
   try {
     const wallet = new Wallet(privateKey);
@@ -26,9 +23,7 @@ export async function signThought(thought: ThoughtPayload, privateKey: string): 
   }
 }
 
-/**
- * Перевіряє підпис думки
- */
+
 export async function verifyThought(
   thought: ThoughtPayload,
   signature: string,

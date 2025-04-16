@@ -4,7 +4,7 @@ dotenv.config();
 
 let verifyMessage: (message: string, signature: string) => string;
 
-// 🧠 Auto-detect ethers version (5 vs 6)
+// Auto-detect ethers version (5 vs 6)
 try {
   const { utils } = require("ethers");
   verifyMessage = utils.verifyMessage;
