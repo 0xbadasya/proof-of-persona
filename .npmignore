@@ -1,11 +1,11 @@
-# Вихідний код
+
 src/
 docs/
 playground/
 .vscode/
 node_modules/
 
-# Конфігурації
+
 tsconfig.json
 tsup.config.ts
 .env
@@ -16,7 +16,7 @@ tsup.config.ts
 .npmignore
 .persona-config.json
 
-# Локальні файли
+
 README.dev.md
 README.docs.md
 .idea/
