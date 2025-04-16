@@ -128,4 +128,7 @@ An idea that sounds simple, but opens up a new philosophy of digital existence.
 We are not adding thinking to Web3. We build Web3 on the basis of thinking.
 
 🧠 persona - your programmable onchain mind
+
+---
+
 🛠 Created by **badasya**
