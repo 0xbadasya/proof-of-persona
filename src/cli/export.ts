@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import archiver from "archiver";
+import { getActivePersonaAlias } from "../utils/config";
 
 const storageDir = path.resolve("storage");
 const exportDir = path.resolve("export");
@@ -12,34 +13,38 @@ export function exportCommand() {
   const target = process.argv[3];
   const zip = process.argv.includes("--zip");
   const format = process.argv.includes("--format=txt") ? "txt" : "json";
-  const isDemo = target === "demo";
+  const onlyActive = process.argv.includes("--only-active");
 
-  if (isDemo) {
+  // Handle demo export
+  if (target === "demo") {
     const demoType = process.argv[4];
-
-    if (demoType === "thoughts") {
-      generateDemoFile("thoughts");
-    } else if (demoType === "personas") {
-      generateDemoFile("personas");
+    if (demoType === "thoughts" || demoType === "personas") {
+      generateDemoFile(demoType);
     } else {
-      console.log(`❌ Please specify: thoughts or personas`);
+      console.log("❌ Please specify 'thoughts' or 'personas' for demo export.");
     }
-
     return;
   }
 
   if (!target || (target !== "thoughts" && target !== "personas")) {
-    console.log(`❌ Usage: persona export [thoughts|personas] [--zip] [--format=txt]`);
+    console.log(`❌ Usage: persona export [thoughts|personas] [--zip] [--format=txt] [--only-active]`);
     return;
   }
 
   const sourceFile = target === "thoughts" ? thoughtsFile : personasFile;
   if (!fs.existsSync(sourceFile)) {
-    console.log(`❌ No ${target} found.`);
+    console.log(`❌ No ${target} data found.`);
     return;
   }
 
-  const exportData = JSON.parse(fs.readFileSync(sourceFile, "utf-8"));
+  let exportData = JSON.parse(fs.readFileSync(sourceFile, "utf-8"));
+
+  // Filter for active persona's thoughts
+  if (onlyActive && target === "thoughts") {
+    const activeAlias = getActivePersonaAlias();
+    exportData = exportData.filter((t: any) => t.author === activeAlias);
+  }
+
   if (!fs.existsSync(exportDir)) fs.mkdirSync(exportDir);
 
   const outFile = path.join(exportDir, `${target}-export.${format}`);
@@ -69,24 +74,21 @@ function generateDemoFile(type: "thoughts" | "personas") {
   if (!fs.existsSync(exportDir)) fs.mkdirSync(exportDir);
 
   const filename = path.join(exportDir, `${type}-demo.json`);
-  const demoContent =
-    type === "thoughts"
-      ? [
-          {
-            content: "Crypto is the new language of freedom.",
-            topic: "philosophy",
-            timestamp: new Date().toISOString(),
-            author: "DemoPersona",
-            signature: "0xSIGNATURE",
-          },
-        ]
-      : [
-          {
-            alias: "DemoPersona",
-            publicKey: "0xPUBLIC_KEY",
-            behaviorModel: "philosopher",
-          },
-        ];
+  const demoContent = type === "thoughts"
+    ? [{
+        content: "Crypto is the new language of freedom.",
+        topic: "philosophy",
+        timestamp: new Date().toISOString(),
+        author: "DemoPersona",
+        signature: "0xSIGNATURE",
+      }]
+    : [{
+        alias: "DemoPersona",
+        publicKey: "0xPUBLIC_KEY",
+        behaviorModel: "philosopher",
+        id: "demo-id",
+        createdAt: new Date().toISOString(),
+      }];
 
   fs.writeFileSync(filename, JSON.stringify(demoContent, null, 2));
   console.log(`🧪 Demo ${type} exported to ${filename}`);

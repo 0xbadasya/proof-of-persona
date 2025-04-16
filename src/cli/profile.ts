@@ -1,22 +1,24 @@
 import fs from "fs";
 import path from "path";
+import { getActivePersonaAlias } from "../utils/config";
+import { loadPersonas } from "../storage/local";
 
-const personasPath = path.resolve("storage", "personas.json");
 const thoughtsPath = path.resolve("storage", "thoughts.json");
 
 export function profileCommand() {
   const asJson = process.argv.includes("--json");
 
-  if (!fs.existsSync(personasPath)) {
-    console.log("No personas found.");
+  const activeAlias = getActivePersonaAlias();
+  if (!activeAlias) {
+    console.error("❌ No active persona. Use: persona use <alias>");
     return;
   }
 
-  const personas = JSON.parse(fs.readFileSync(personasPath, "utf-8"));
-  const persona = personas[personas.length - 1];
+  const personas = loadPersonas();
+  const persona = personas.find(p => p.alias === activeAlias);
 
   if (!persona) {
-    console.log("No persona found.");
+    console.error(`❌ Active persona "${activeAlias}" not found.`);
     return;
   }
 
@@ -58,9 +60,7 @@ export function profileCommand() {
     return;
   }
 
-  // Default human-readable output
-  console.log(`
-Persona Profile
+  console.log(`\nPersona Profile
 ────────────────────────────────────────────
 Alias           : ${alias}
 Public Key      : ${publicKey}

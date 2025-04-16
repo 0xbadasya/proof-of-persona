@@ -1,15 +1,35 @@
-import { verifyThought } from "../core/signer";
 import fs from "fs";
-import * as dotenv from "dotenv";
-dotenv.config();
+import { verifyThought } from "../core/signer";
+import { getActivePersonaAlias } from "../utils/config";
+import { loadPersonas } from "../storage/local";
 
 export async function verifyCommand() {
   const thoughtsFile = "./storage/thoughts.json";
-  if (!fs.existsSync(thoughtsFile)) return console.error("❌ No thoughts found");
+  if (!fs.existsSync(thoughtsFile)) {
+    console.error("❌ No thoughts found.");
+    return;
+  }
 
   const thoughts = JSON.parse(fs.readFileSync(thoughtsFile, "utf-8"));
   const last = thoughts.at(-1);
-  if (!last) return console.error("❌ No thoughts to verify");
+  if (!last) {
+    console.error("❌ No thoughts to verify.");
+    return;
+  }
+
+  const activeAlias = getActivePersonaAlias();
+  if (!activeAlias) {
+    console.error("❌ No active persona. Use: persona use <alias>");
+    return;
+  }
+
+  const personas = loadPersonas();
+  const persona = personas.find(p => p.alias === activeAlias);
+
+  if (!persona) {
+    console.error(`❌ Active persona "${activeAlias}" not found.`);
+    return;
+  }
 
   const isValid = await verifyThought(
     {
@@ -18,10 +38,9 @@ export async function verifyCommand() {
       timestamp: last.timestamp,
     },
     last.signature,
-    process.env.PUBLIC_KEY!
+    persona.publicKey
   );
 
   console.log("🧾 Thought:", last.content);
   console.log("🔐 Signature valid:", isValid);
 }
-

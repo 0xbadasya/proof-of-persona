@@ -10,7 +10,9 @@ import { importCommand } from "./import";
 import { initCommand } from "./init";
 import { profileCommand } from "./profile";
 import { editCommand } from "./edit";
+import { useCommand } from "./use";
 import pkg from "../../package.json";
+import { whoamiCommand } from "./whoami";
 
 const command = process.argv[2];
 
@@ -74,6 +76,12 @@ switch (command) {
   case "edit":
     editCommand();
     break
+  case "use":
+    useCommand();
+    break;
+  case "whoami":
+    whoamiCommand();
+    break;
   default:
     console.log(`❌ Unknown command: "${command}"`);
     printHelp();
@@ -83,43 +91,59 @@ switch (command) {
 // Main help
 function printHelp() {
     console.log(`
-    persona CLI – your programmable onchain mind
-    by badasya · Badasya Software
+  persona CLI – your programmable onchain mind
+  by badasya · Badasya Software
   
-    📦 Available commands:
-      create [alias]           Create a new persona (you can pass alias)
-      init                     Interactive persona creation wizard
-      edit <alias> [options]   Edit existing persona (change alias or behavior)
-      post "text"              Post a thought (supports --topic=...)
-      verify                   Verify the last posted thought
-      list                     List all posted thoughts
-      profile                  Show current persona profile and stats (supports --json)
-      clean                    Remove invalid or incomplete thoughts
-      export [type]            Export thoughts or personas (--zip, --format=txt)
-      import [file]            Import thoughts or personas (.json, --replace optional)
-      memory                   Manage memory log (use: help memory for more)
+  ────────────────────────────────────────────────────────────
+  📘 General Commands:
+    create [alias]            Create a new persona (optionally pass alias)
+    init                      Interactive persona creation wizard
+    edit <alias> [options]    Edit an existing persona (alias or behavior)
+    use <alias>               Set the active persona
+    whoami                    Show the currently active persona
   
-    ⚙️ Edit options:
-      --alias=newAlias         Set a new alias for the persona
-      --behavior=model         Change behavior model (e.g. "socratic-punk")
+  🧠 Thought Commands:
+    post "text"               Post a thought (use --topic=...)
+    verify                    Verify the last posted thought
+    list                      List all posted thoughts
+    profile                   Show active persona profile (use --json)
+    clean                     Remove invalid or incomplete thoughts
   
-    🌐 Global options:
-      -v, --version            Show CLI version
-      -h, --help               Show this help message
+  🧳 Import / Export:
+    export [type]             Export thoughts or personas
+                              Options:
+                                --zip             Compress export to .zip
+                                --format=txt      Export as .txt (default is JSON)
+                                --only-active     Export only active persona's data
+    import [file]             Import from a .json file
+                              Options:
+                                --replace         Overwrite existing entries
   
-    🧪 Examples:
-      persona create satoshi
-      persona init
-      persona edit satoshi --alias=cypher --behavior=zen-daoist
-      persona post "Crypto = freedom" --topic=cypherpunk
-      persona verify
-      persona profile
-      persona profile --json
-      persona export thoughts --zip
-      persona import thoughts.json --replace
+  🧠 Memory Management:
+    memory log "..."          Append a memory entry
+    memory show               Show memory log
+    memory clear              Clear memory log
   
-    📁 Project:
-      https://github.com/0xbadasya/proof-of-persona
+  🌍 Global Options:
+    -v, --version             Show CLI version
+    -h, --help                Show this help message
+  
+  📁 Config:
+    Config is stored in .persona-config.json and updated via:
+      persona use <alias>
+  
+  ────────────────────────────────────────────────────────────
+  📌 Examples:
+    persona create satoshi
+    persona edit satoshi --alias=cypher --behavior=zen-daoist
+    persona post "Crypto is freedom" --topic=cypherpunk
+    persona verify
+    persona profile --json
+    persona export thoughts --zip --only-active
+    persona import backup.json --replace
+    persona memory log "Posted my first thought"
+  
+  🔗 Project: https://github.com/0xbadasya/proof-of-persona
     `);
   }
   

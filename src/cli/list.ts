@@ -1,8 +1,15 @@
 import { loadThoughts } from "../storage/local";
+import { getActivePersonaAlias } from "../utils/config";
 import * as dotenv from "dotenv";
 dotenv.config();
 
 export async function listCommand() {
+  const activeAlias = getActivePersonaAlias();
+  if (!activeAlias) {
+    console.error("❌ No active persona. Use: persona use <alias>");
+    return;
+  }
+
   const thoughts = loadThoughts();
 
   if (!thoughts.length) {
@@ -10,17 +17,22 @@ export async function listCommand() {
     return;
   }
 
-  console.log(`🧠 Found ${thoughts.length} thought(s):\n`);
-
-  const validThoughts = thoughts.filter(t =>
-    t?.content && t?.topic && t?.timestamp && t?.signature && t?.author
+  const validThoughts = thoughts.filter(
+    t =>
+      t?.content &&
+      t?.topic &&
+      t?.timestamp &&
+      t?.signature &&
+      t?.author === activeAlias
   );
-  
+
   if (!validThoughts.length) {
-    console.log("❌ No valid thoughts found.");
+    console.log(`❌ No thoughts found for active persona "${activeAlias}".`);
     return;
   }
-  
+
+  console.log(`🧠 Found ${validThoughts.length} thought(s) by "${activeAlias}":\n`);
+
   validThoughts.forEach((t, i) => {
     console.log(`#${i + 1}`);
     console.log(`🗯️  ${t.content}`);
