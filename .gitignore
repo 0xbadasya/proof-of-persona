@@ -1,33 +1,27 @@
-# ─── Базове ────────────────
+
 node_modules/
 dist/
 export/
 storage/
 tests/
 
-# ─── Env і ключі ───────────
 .env
 .env.*
 
-# ─── Логи, тимчасові файли ─
 *.log
 *.tmp
 *.bak
 *.zip
 
-# ─── IDE / Editor ──────────
 .vscode/
 .idea/
 
-# ─── OS / Trash ────────────
 .DS_Store
 Thumbs.db
 
-# ─── Cache / Coverage ──────
 .cache/
 coverage/
 
-# ─── Резервні файли ────────
 *.tsbuildinfo
 
 /README.md
