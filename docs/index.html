@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Proof of Persona Docs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./assets/logo.png.png" type="image/png">
+
+  <!-- Docsify Themeable DARK -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css" />
+
+  <style>
+    /* Spinner */
+    #app:empty::before {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 48px;
+      margin: 100px auto;
+      border: 5px solid rgba(255, 255, 255, 0.1);
+      border-left-color: #42b983;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Logo left of title */
+    .app-name::before {
+      content: '';
+      display: inline-block;
+      background: url('./assets/logo.png.png') no-repeat center/contain;
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    /* Custom theme overrides */
+    :root {
+      --theme-color: #42b983;
+      --mono-font: 'JetBrains Mono', Monaco, monospace;
+      --base-font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">Loading...</div>
+
+  <script>
+    window.$docsify = {
+      name: 'proof-of-persona   ',
+      repo: '0xbadasya/proof-of-persona',
+      loadSidebar: true,
+      homepage: 'introduction.md'
+    };
+  </script>
+
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
+</body>
+</html>

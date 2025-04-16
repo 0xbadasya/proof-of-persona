@@ -30,3 +30,4 @@ coverage/
 # ─── Резервні файли ────────
 *.tsbuildinfo
 
+README.md

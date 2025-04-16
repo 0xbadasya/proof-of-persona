@@ -1,7 +1,7 @@
 {
   "name": "proof-of-persona",
   "version": "1.0.0",
-  "description": "Криптографічно верифіковані цифрові особистості з ончейн-репутацією та LLM-стилем мислення.",
+  "description": "Cryptographically verified digital personalities with online reputations and LLM-style thinking.",
   "main": "dist/index.js",
   "type": "commonjs",
   "author": "badasya",
@@ -35,6 +35,7 @@
   "dependencies": {
     "adm-zip": "^0.5.16",
     "archiver": "^7.0.1",
+    "docsify-darklight-theme": "^3.2.0",
     "dotenv": "^16.5.0",
     "ethers": "^5.8.0",
     "fast-levenshtein": "^3.0.0",
