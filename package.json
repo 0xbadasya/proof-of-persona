@@ -1,6 +1,6 @@
 {
   "name": "proof-of-persona",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cryptographically verified digital personalities with online reputations and LLM-style thinking.",
   "main": "dist/index.js",
   "type": "commonjs",
@@ -13,12 +13,47 @@
   "bugs": {
     "url": "https://github.com/0xbadasya/proof-of-persona/issues"
   },
+  "files": [
+  "dist",
+  "bin",
+  "LICENSE",
+  "README.md"
+  ],
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "ts-node playground/create-persona.ts",
     "build": "tsup",
     "test": "jest"
   },
+  "keywords": [
+    "persona",
+    "onchain",
+    "identity",
+    "web3",
+    "cli",
+    "digital-identity",
+    "zkproof",
+    "thoughts",
+    "anonymous",
+    "pseudonymous",
+    "self-sovereign",
+    "decentralized",
+    "crypto-persona",
+    "programmable",
+    "verified-identity",
+    "reputation",
+    "philosophy",
+    "behavior-model",
+    "crypto-identity",
+    "blockchain-identity",
+    "web3-authorship",
+    "daos",
+    "onchain-reputation",
+    "signed-content",
+    "verified-mind",
+    "llm-identity",
+    "privacy"
+  ],
   "directories": {
     "doc": "docs",
     "test": "tests"
