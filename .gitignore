@@ -2,7 +2,7 @@
 node_modules/
 dist/
 export/
-storage/
+./storage/
 tests/
 
 .env
